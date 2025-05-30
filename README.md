@@ -1,5 +1,4 @@
-![](/media/media/Screenshot%20from%202025-05-30%03-42-58.png)
-
+![](media/Screenshot%20from%202025-05-30%2003-42-58.png)  
 
 Джанго ДРФ. 
     
