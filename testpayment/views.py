@@ -11,6 +11,7 @@ from testpayment.models import BankPayment, CounterOrganization, OurOrganization
 from testpayment.serializers import BankPaymentCreationSerializer, CounterOrganizationSerializer, PaymentCreationSerializer
 import requests
 from django.shortcuts import get_object_or_404
+from django.db.models import F
 
 """Из задания ясно, что этот ендпоинт эмулирует апи создания Payment. Это не Пост,\
     а Гет. Мы здесь принимам джейсон и в зависимости от того, что приняли, либо создаем Платеж, либо нет. Сериализатор - лишнее"""
@@ -62,5 +63,7 @@ class BalanceInn(generics.RetrieveUpdateDestroyAPIView):
                 counterorg = counterorg_item,
                 document_number =request.data['document_number'],
                             )
+        ourorg_item.balance = F('balance') + payment_item.amount
+        ourorg_item.save()
         print('payment_item.pk', payment_item.pk)
         return Response(serializer.data)
